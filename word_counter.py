@@ -27,7 +27,7 @@ def check_contain(file_path):
 
 # 处理中文文本，返回所有文字为一个列表
 def operation_ch_file(word):
-    word_2 = re.sub('[，~。、\n^a-zA-Z,:{}！@￥%+—*&“”]', '', word)     # 去掉特殊字符
+    word_2 = re.sub('[，~。、\n^a-zA-Z,:{}！@￥%+—*&“”]', '', word)     # 去掉特殊字和字母
     word_3 = word_2.replace(" ", "")                           # 去掉空格
     word_ch_list = (",".join(word_3)).split(',')             # 处理成列表
     return word_ch_list
@@ -41,8 +41,8 @@ def operation_en_file(word):
 
 
 # 将字典写入文档
-def write_file(content):
-    content_file = open('word_num_counter.txt', 'w')
+def write_file(content, write_file_path):
+    content_file = open(write_file_path, 'w', encoding='utf-8-sig')
     # 将字典按value大小，从大到小排序，并且写入文件
     for k in sorted(content, key=content.__getitem__):
         content_s = k + " ： " + str(content[k]) + "\n"
@@ -51,4 +51,4 @@ def write_file(content):
 
 
 if __name__ == '__main__':
-    write_file(check_contain(input('请输入文件路径：')))
+    write_file(check_contain(input('请输入文件路径：')), input('请输入存储结果的文档路径:'))
