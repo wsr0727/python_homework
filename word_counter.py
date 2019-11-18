@@ -44,7 +44,7 @@ def operation_en_file(word):
 def write_file(content):
     content_file = open('word_num_counter.txt', 'w')
     # 将字典按value大小，从大到小排序，并且写入文件
-    for k in sorted(content, key=content.__getitem__, reverse=True):
+    for k in sorted(content, key=content.__getitem__):
         content_s = k + " ： " + str(content[k]) + "\n"
         content_file.write(content_s)
     content_file.close()
