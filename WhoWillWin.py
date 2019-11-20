@@ -1,14 +1,18 @@
 import random
 
-
+# 创建一个精灵父类
 class Sprite:
+
     def __init__(self, blood, damage):
         self.blood = blood
         self.damage = damage
 
     def hit(self):
+        """
+        每回合的攻击力
+        :return: damage 攻击力
+        """
         self.damage = self.damage + random.randint(-5, 5)
-        print(self.damage)
         return self.damage
 
 
