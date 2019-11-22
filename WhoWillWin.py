@@ -1,5 +1,6 @@
 import random
 
+
 # 创建一个精灵父类
 class Sprite:
 
