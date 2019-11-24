@@ -1,7 +1,6 @@
 import random
 
 
-# 创建一个精灵父类
 class Sprite:
 
     def __init__(self, blood, damage):
@@ -11,10 +10,10 @@ class Sprite:
     def hit(self):
         """
         每回合的攻击力
-        :return: damage 攻击力
+        :return: round_damage
         """
-        self.damage = self.damage + random.randint(-5, 5)
-        return self.damage
+        round_damage = self.damage + random.randint(-5, 5)
+        return round_damage
 
 
 class Hero(Sprite):
@@ -22,9 +21,12 @@ class Hero(Sprite):
         Sprite.__init__(self, blood, damage)
 
     def hit(self):
-        self.damage = self.damage + random.randint(-5, 5)
-        print('英雄在此回合攻击力', self.damage)
-        return self.damage
+        """
+        扩展父类方法，输出英雄每回合攻击力
+        :return:
+        """
+        print('英雄在此回合攻击力', Sprite.hit(self))
+        return Sprite.hit(self)
 
 
 class Monster(Sprite):
@@ -32,13 +34,16 @@ class Monster(Sprite):
         Sprite.__init__(self, blood, damage)
 
     def hit(self):
-        self.damage = self.damage + random.randint(-5, 5)
-        print('怪物在此回合攻击力', self.damage)
-        return self.damage
+        """
+        扩展父类方法，输出怪物每回合攻击力
+        :return: round_damage
+        """
+        print('怪物在此回合攻击力', Sprite.hit(self))
+        return Sprite.hit(self)
 
 
 if __name__ == '__main__':
-    hero = Hero(100, 20)
+    hero = Hero(200, 10)
     monster = Monster(100, 20)
     print('英雄的血量', hero.blood, '怪物的血量', monster.blood)
     fight_round = 1

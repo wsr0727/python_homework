@@ -1,18 +1,17 @@
-from ApiCacheTest import Cache_Operationg
-from ApiCacheTest import Http_Operation
-import json
+from ApiCacheTest import CacheOperation
+from ApiCacheTest import HttpOperation
+from datetime import datetime as d
+import os
 
 if __name__ == '__main__':
+    # 以下面接口数据为例
     url = 'http://beta.api.baby-bus.com/api.php/Api/Test/createHeader'
-    headers = 'Content-Type:application/json'
+    headers = None
     data = {
         "app_id": "212",
-        "account_sign": "",
         "channel": "appStore",
         "device_platform": "iPhone",
-        "app_age": "0",
         "app_version": "10.00.0309",
-        "account_sign_type": "",
         "device_type": "iPhone",
         "device_screen": "1334*750",
         "platform": "1",
@@ -23,12 +22,24 @@ if __name__ == '__main__':
         "language": "zh",
         "os_version": "12.10",
         "country": "US",
-        "account_id": "",
         "app_key": "com.sinyee.babybus.ranch"
     }
-
-
-    http1 = Http_Operation.HttpOperation(url, headers, json.dumps(data))
-    print(http1.post_http())
-    file1 = Cache_Operationg.CaheOperationg(str(http1.post_http()))
-    file1.operation_file()
+# ---------分割线--------
+    '''
+    请求接口前，判断当天缓存文件是否存在，如果存在直接输出缓存数据，如果不存在则请求接口并写入文件
+    '''
+    # 当天的文件地址
+    today_cache = "./cache/" + "{}-{}-{}.txt".format(d.now().year, d.now().month, d.now().day)
+    # 判断缓存文件是否存在
+    if os.path.exists(today_cache):
+        # 今日缓存文件存在，读取缓存数据
+        http_content = open(today_cache, 'r', encoding='utf-8-sig')
+        http_content_str = http_content.read()
+        http_content.close()
+        print("以下是缓存数据:", http_content_str)
+    else:
+        # 缓存文件不存在，请求接口，并写入文件
+        http = HttpOperation(url, headers, data)
+        file1 = CacheOperation(str(http.post_http().decode()))
+        file1.operation_file()
+        print("将接口数据已经存入缓存")
