@@ -42,7 +42,7 @@ class Monster(Sprite):
         return Sprite.hit(self)
 
 
-if __name__ == '__main__':
+def main():
     hero = Hero(200, 10)
     monster = Monster(100, 20)
     print('英雄的血量', hero.blood, '怪物的血量', monster.blood)
@@ -60,3 +60,7 @@ if __name__ == '__main__':
         fight_round += 1
     else:
         print('初始数值错误')
+
+
+if __name__ == '__main__':
+    main()

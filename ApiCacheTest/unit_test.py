@@ -2,7 +2,8 @@ import unittest
 from ApiCacheTest import HttpOperation
 import json
 
-# 测试http
+
+# 测试http请求结果
 class TestHttpOperationMethods(unittest.TestCase):
     def test_HttpOperation(self):
         url = 'http://beta.api.baby-bus.com/api.php/v3/resource_url'
@@ -26,22 +27,21 @@ class TestHttpOperationMethods(unittest.TestCase):
             'age': 0,
             'type': 1
         }
+        # 将接口实例化，test_1测试get方法，test_2测试post方法
         test_1 = HttpOperation(url, None, None)
+        test_dict1 = json.loads(test_1.get_http().decode())
+
         test_2 = HttpOperation(url_2, headers, data)
-        #self.assertEqual(50, test_1.get_http())
-        #self.assertEqual(30, test_1.damage)
-        #self.assertNotEqual(50, test_1.blood)
-        #self.assertNotEqual(30, test_1.damage)
-        #self.assertTrue(25 <= test_1.hit() <= 35)
-        #self.assertIsNone(test_1.get_http())
-        #self.assertIsNone(test_1.get_http())
+        test_dict2 = json.loads(test_2.post_http().decode())
+
         self.assertIsNotNone(test_1.get_http())
+        self.assertEqual("1", test_dict1["status"])
+
+        self.assertEqual(1, test_dict2["status"])
         self.assertIsNotNone(test_2.post_http())
-        Str = json.dumps(test_2.post_http())
-        Dict = json.loads(Str)
-        #dict = test_2.post_http()['states']
-        #self.assertEqual(1, dict)
-        print(Dict)
+        self.assertEqual(3, test_dict2["data"][0]["content"][0]["pay_type"])
+        self.assertTrue(test_dict2["data"][0]["content"][0]["pay_type"] == 3)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -3,7 +3,8 @@ from ApiCacheTest import HttpOperation
 from datetime import datetime as d
 import os
 
-if __name__ == '__main__':
+
+def main():
     # 以下面接口数据为例
     url = 'https://app-zh.beta.baby-bus.com//super_class_v2'
     headers = {
@@ -25,22 +26,30 @@ if __name__ == '__main__':
         'age': 0,
         'type': 1
     }
-    # ---------分割线--------
+    # -----------------分割线-------------------
     '''
     请求接口前，判断当天缓存文件是否存在，如果存在直接输出缓存数据，如果不存在则请求接口并写入文件
     '''
+
     # 当天的文件地址
     today_cache = "./cache/" + "{}-{}-{}.txt".format(d.now().year, d.now().month, d.now().day)
+
     # 判断缓存文件是否存在
     if os.path.exists(today_cache):
+
         # 今日缓存文件存在，读取缓存数据
         http_content = open(today_cache, 'r', encoding='utf-8-sig')
         http_content_str = http_content.read()
         http_content.close()
-        print("以下是缓存数据:", http_content_str)
+        print("以下是从文件读取的缓存数据:", http_content_str)
     else:
+
         # 缓存文件不存在，请求接口，并写入文件
         http = HttpOperation(url, headers, data)
         file1 = CacheOperation(str(http.post_http().decode()))
         file1.operation_file()
         print("将接口数据已经存入缓存")
+
+
+if __name__ == '__main__':
+    main()
