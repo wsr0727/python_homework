@@ -5,26 +5,27 @@ import os
 
 if __name__ == '__main__':
     # 以下面接口数据为例
-    url = 'http://beta.api.baby-bus.com/api.php/Api/Test/createHeader'
-    headers = None
+    url = 'https://app-zh.beta.baby-bus.com//super_class_v2'
+    headers = {
+        'CommonHeaderData': 'ew0KICAiYXBwX2lkIiA6ICIyMTIiLA0KICAiYWNjb3VudF9zaWduIiA6ICIiLA0KICAiY2hhbm5lbC'
+                            'IgOiAiYXBwU3RvcmUiLA0KICAiZGV2aWNlX3BsYXRmb3JtIiA6ICJpUGhvbmUiLA0KICAiYXBwX2FnZ'
+                            'SIgOiAiMCIsDQogICJhcHBfdmVyc2lvbiIgOiAiMTAuMDAuMDMxNCIsDQogICJhY2NvdW50X3NpZ25fd'
+                            'HlwZSIgOiAiIiwNCiAgImRldmljZV90eXBlIiA6ICJpUGhvbmUiLA0KICAiZGV2aWNlX3NjcmVlbiIgO'
+                            'iAiMTMzNCo3NTAiLA0KICAicGxhdGZvcm0iIDogIjEiLA0KICAibG9jYXRpb24iIDogIuemj+W7ui3npo'
+                            '/lt54iLA0KICAiZGV2aWNlX25hbWUiIDogIuWbveihjOOAgeaXpeeJiOOAgea4r+ihjGlQaG9uZSA3Iiw'
+                            'NCiAgImlkZW50IiA6ICIzRDdGREJFNS02OURELTQ3RTEtOTgwQS0yMUE0OTI2OUQwNkQiLA0KICAic2lnb'
+                            'l9pZGVudCIgOiAiOEVEOTM0MDYtNEY1Mi00Qzg5LUE3QjItNDRDNEY4QzU4Q0JBIiwNCiAgImxhbmd1YWdl'
+                            'IiA6ICJ6aCIsDQogICJvc192ZXJzaW9uIiA6ICIxMi4xMCIsDQogICJjb3VudHJ5IiA6ICJHQiIsDQogICJh'
+                            'Y2NvdW50X2lkIiA6ICIiLA0KICAiYXBwX2tleSIgOiAiY29tLnNpbnllZS5iYWJ5YnVzLnJhbmNoIg0KfQ==',
+        'CommonHeaderSign': 'C1E0F5F649A7EF1D12E9825496C38D10',
+        'CommonHeaderSignType': 'md5'}
     data = {
-        "app_id": "212",
-        "channel": "appStore",
-        "device_platform": "iPhone",
-        "app_version": "10.00.0309",
-        "device_type": "iPhone",
-        "device_screen": "1334*750",
-        "platform": "1",
-        "location": "福建-福州",
-        "device_name": "国行、日版、港行iPhone 7",
-        "ident": "3D7FDBE5-69DD-47E1-980A-21A49269D06D",
-        "sign_ident": "8ED93406-4F52-4C89-A7B2-44C4F8C58CBA",
-        "language": "zh",
-        "os_version": "12.10",
-        "country": "US",
-        "app_key": "com.sinyee.babybus.ranch"
+        'app_key': 'com.sinyee.babybus.world',
+        'lang': 'en',
+        'age': 0,
+        'type': 1
     }
-# ---------分割线--------
+    # ---------分割线--------
     '''
     请求接口前，判断当天缓存文件是否存在，如果存在直接输出缓存数据，如果不存在则请求接口并写入文件
     '''
