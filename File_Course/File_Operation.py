@@ -8,33 +8,34 @@ class FileOperation:
         self.file_dir = file_dir
 
     def file_rename(self):
-        file_new_name=[]
+        '''
+        将文件统一增加前缀
+        :return: file_new_name 修改前缀后的文件名以列表形式
+        '''
+        file_new_name = []
         for root, dirs, files in os.walk(self.file_dir):
             for f in files:
                 file_path = os.path.join(root, f)
                 new_name = os.path.join(root, 'wsr' + f)
                 os.rename(file_path, new_name)
                 file_new_name.append(new_name)
-
         return file_new_name
+
     def file_sort(self):
-        # 获取文件创建时间,并写入字典
-        file_sort = {}
-        for f in self.file_rename():
-            file_sort[f] = os.path.getctime(f)
-        return file_sort
-
-
-    def file_rename2(self):
-        #从后往前数 第一个小数点前加序号
+        '''
+        获取文件创建时间，按时间加入编号，并按时间排序输出新文件名
+        :return: None
+        '''
         num = 1
-        for k in sorted(self.file_sort(), key=self.file_sort().__getitem__):
-            strk =
-            new_name = os.path.join()
-            os.rename(k, new_name)
+        file_sort_dict = {}
+        for f in self.file_rename():
+            file_sort_dict[f] = os.path.getctime(f)
+
+        for k in sorted(file_sort_dict, key=file_sort_dict.__getitem__):
+            name, suffix = os.path.splitext(k)
+            name_num_path = name + str(num) + suffix
+            file_new_path, file_new_name = os.path.split(name_num_path)
+            os.rename(k, name_num_path)
+            print(file_new_name)
             num += 1
 
-
-x = FileOperation('./1')
-print(x.file_rename())
-print(x.file_sort())
