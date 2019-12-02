@@ -11,16 +11,18 @@ class FileOperation:
        # 获取文件创建时间
        for root, dirs, files in os.walk(self.file_dir):
            for f in files:
-               old_name = os.path.join(root, f)
-               time = os.path.getctime(old_name)
+               file_path = os.path.join(root, f)
+               time = os.path.getctime(file_path)
                print(time)
     def file_rename(self):
-
         for root, dirs, files in os.walk(self.file_dir):
             num = 1
             for f in files:
-
-                old_name = os.path.join(root, f)
+                file_path = os.path.join(root, f)
                 new_name = os.path.join(root, str(num)+f)
-                os.rename(old_name, new_name)
+                os.rename(file_path, new_name)
                 num += 1
+
+
+x = FileOperation('./1')
+x.file_sort()
