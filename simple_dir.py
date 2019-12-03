@@ -1,11 +1,13 @@
 import os
 import time
 
+
 def simple_dir(file_dir):
-    '''
-    输出路径下的所有文件信息
-    :return: none
-    '''
+    """
+    显示路径下所有文件或文件夹的信息
+    :param file_dir: 文件路径
+    :return:
+    """
     file_num = 0
     dir_num = 0
     file_size = 0
@@ -13,7 +15,7 @@ def simple_dir(file_dir):
         file_path = os.path.join(file_dir, f)
         time_local = time.localtime(os.path.getctime(file_path))
         file_time = time.strftime("%Y/%m/%d  %a %H:%M:%S", time_local)
-        if os.path.isdir(file_path) == True:
+        if os.path.isdir(file_path) is True:
             file_isdir = '<DIR>'
             dir_num += 1
         else:
